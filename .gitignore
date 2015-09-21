@@ -1,0 +1,11 @@
+.idea/
+.settings/
+target/
+*.class
+.classpath
+*.iml
+*.jar
+*/bin/*
+.project
+.DS_Store
+*/.gitignore
