@@ -25,7 +25,7 @@ import com.cms.util.HttpUtils;
  * 
  * Ftl文件安全过滤器
  * 
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class FtlFilter implements Filter {

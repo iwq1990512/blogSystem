@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 /*
 Uploadify
@@ -14,7 +13,6 @@ if (file_exists($_SERVER['DOCUMENT_ROOT'] . $targetFolder . '/' . $_POST['filena
 } else {
 	echo 0;
 }
-=======
 <?php
 /*
 Uploadify
@@ -30,5 +28,4 @@ if (file_exists($_SERVER['DOCUMENT_ROOT'] . $targetFolder . '/' . $_POST['filena
 } else {
 	echo 0;
 }
->>>>>>> branch 'master' of git@git.oschina.net:herbert/byvision.git
 ?>

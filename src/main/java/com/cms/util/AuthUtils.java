@@ -13,7 +13,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 /**
  * 授权相关的工具类
  * 
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class AuthUtils {

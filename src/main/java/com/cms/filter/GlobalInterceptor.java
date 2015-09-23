@@ -21,7 +21,7 @@ import com.cms.util.HttpUtils;
 
 /**
  * 系统参数配置拦截器
- * @author Herbert
+ * @author yuheng
  * 
  */
 @Component

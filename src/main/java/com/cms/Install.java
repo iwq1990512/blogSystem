@@ -23,7 +23,7 @@ import com.mysql.jdbc.Connection;
  * Windows: set MAVEN_OPTS=-Dfile.encoding=UTF-8<br>
  * Linux: export MAVEN_OPTS=-Dfile.encoding=UTF-8
  * 
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class Install {

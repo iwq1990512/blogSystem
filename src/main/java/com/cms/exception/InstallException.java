@@ -7,7 +7,7 @@
 package com.cms.exception;
 
 /**
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class InstallException extends Exception {

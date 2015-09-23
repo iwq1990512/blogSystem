@@ -14,7 +14,7 @@ package com.cms.constant;
  */
 public class CommentConstant {
 	/**
-	 * @author Herbert
+	 * @author yuheng
 	 * 
 	 */
 	public static enum Status {

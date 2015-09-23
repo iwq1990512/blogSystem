@@ -7,13 +7,13 @@
 package com.cms.constant;
 
 /**
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class UserConstant {
 
 	/**
-	 * @author Herbert
+	 * @author yuheng
 	 * 
 	 */
 	public static enum Type {

@@ -18,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 分页器
  * 
- * @author Herbert
+ * @author yuheng
  * 
  * @param <T>
  */

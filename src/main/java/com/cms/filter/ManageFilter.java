@@ -26,7 +26,7 @@ import com.cms.entity.Admin;
  * 
  * 管理过滤器
  * 
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class ManageFilter implements Filter {

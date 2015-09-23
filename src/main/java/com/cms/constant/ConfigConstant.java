@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * 系统配置常量
  * 
- * @author Herbert
+ * @author yuheng
  */
 @Component
 public class ConfigConstant {

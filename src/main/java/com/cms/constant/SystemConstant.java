@@ -11,7 +11,7 @@ import com.cms.util.PropertyUtils;
 /**
  * 系统常量
  * 
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class SystemConstant {

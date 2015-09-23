@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cms.constant.SystemConstant;
 
 /**
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class MediaUtils {

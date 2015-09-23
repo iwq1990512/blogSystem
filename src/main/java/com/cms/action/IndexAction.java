@@ -17,7 +17,7 @@ import com.cms.exception.TemplateNotFoundException;
 /**
  * 首页
  * 
- * @author Herbert
+ * @author yuheng
  */
 @Controller
 public class IndexAction extends BaseAction {

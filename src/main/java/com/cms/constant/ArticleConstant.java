@@ -9,7 +9,7 @@ package com.cms.constant;
 /**
  * 文件常量
  * 
- * @author Zhang jiale
+ * @author yuheng
  * 
  */
 public class ArticleConstant {
@@ -17,7 +17,7 @@ public class ArticleConstant {
 	/**
 	 * 文件状态
 	 * 
-	 * @author Herbert
+	 * @author yuheng
 	 * 
 	 */
 	public static enum Status {
@@ -33,7 +33,7 @@ public class ArticleConstant {
 	/**
 	 * 审核
 	 * 
-	 * @author Herbert
+	 * @author yuheng
 	 * 
 	 */
 	public static enum check {

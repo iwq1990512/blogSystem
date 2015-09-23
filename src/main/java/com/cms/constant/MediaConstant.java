@@ -9,7 +9,7 @@ package com.cms.constant;
 /**
  * 附件
  * 
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class MediaConstant {
@@ -19,7 +19,7 @@ public class MediaConstant {
 	 * photo：照片<br>
 	 * file：文件<br>
 	 * 
-	 * @author Herbert
+	 * @author yuheng
 	 * 
 	 */
 	public static enum Type {
@@ -35,7 +35,7 @@ public class MediaConstant {
 	/**
 	 * 种类
 	 * 
-	 * @author Herbert
+	 * @author yuheng
 	 * 
 	 */
 	public static enum Kind {

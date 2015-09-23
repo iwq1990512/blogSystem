@@ -25,7 +25,7 @@ import com.cms.util.SSUtils;
 /**
  * 网站配置action
  * 
- * @author Herbert
+ * @author yuheng
  * 
  */
 @Controller

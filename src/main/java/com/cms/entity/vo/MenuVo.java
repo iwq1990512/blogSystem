@@ -3,7 +3,7 @@ package com.cms.entity.vo;
 /**
  * 菜单VO
  * 
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class MenuVo {

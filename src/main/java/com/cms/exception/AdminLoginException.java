@@ -10,7 +10,7 @@ package com.cms.exception;
  * 
  * 系统配置Key获得的Value为空
  * 
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class AdminLoginException extends Exception {

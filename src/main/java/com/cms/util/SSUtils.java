@@ -6,7 +6,7 @@ import org.jsoup.safety.Whitelist;
 import org.springframework.web.util.HtmlUtils;
 
 /**
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class SSUtils {

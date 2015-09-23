@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 /*
 Uploadify
@@ -27,7 +26,6 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
 		echo 'Invalid file type.';
 	}
 }
-=======
 <?php
 /*
 Uploadify
@@ -56,5 +54,4 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
 		echo 'Invalid file type.';
 	}
 }
->>>>>>> branch 'master' of git@git.oschina.net:herbert/byvision.git
 ?>

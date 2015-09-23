@@ -10,7 +10,7 @@ package com.cms.exception;
  * 
  * 目录没有发现异常
  * 
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class ArticleNotFoundException extends Exception {

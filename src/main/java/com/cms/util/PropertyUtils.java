@@ -20,7 +20,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 /**
  * 属性工具类
  * 
- * @author Herbert
+ * @author yuheng
  * 
  */
 public class PropertyUtils extends PropertyPlaceholderConfigurer {
