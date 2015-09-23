@@ -28,17 +28,26 @@
 
 <body>
 	<div class="blog-masthead">
-		<div class="container">
-			<nav class="blog-nav">
-			<@shishuo_folder_list_tag folderId= 0>
-			<a class="blog-nav-item <#if 0==g_folderId>active</#if>" href="${BASE_PATH}/index.htm">首页</a>
-	                <#list tag_folder_list as tag_folder>
-	                	<a class="blog-nav-item <#if tag_folder.folderId==g_folderId>active</#if>" href="<@shishuo_folder_url_tag folderId=tag_folder.folderId/>">${tag_folder.name}</a>
-			</#list>
-           		</@shishuo_folder_list_tag>
-                 <a class="blog-nav-item" href="${BASE_PATH}/admin/login.htm">登录</a>
-			</nav>
-
-		</div>
+        <ul class="list-inline pull-right">
+            <li>
+                <a id="logonModal" href="http://www.52menshao.com/third/login/3">
+                    <img alt="QQ登录" src="http://www.52menshao.com/assets/visitor/img/qq_bt_blue_76X24.png">
+                </a>
+            </li>
+        </ul>
 	</div>
+    <div class="blog-masthead">
+    <div class="container">
+        <nav class="blog-nav">
+		<@shishuo_folder_list_tag folderId= 0>
+            <a class="blog-nav-item <#if 0==g_folderId>active</#if>" href="${BASE_PATH}/index.htm">首页</a>
+			<#list tag_folder_list as tag_folder>
+                <a class="blog-nav-item <#if tag_folder.folderId==g_folderId>active</#if>" href="<@shishuo_folder_url_tag folderId=tag_folder.folderId/>">${tag_folder.name}</a>
+			</#list>
+		</@shishuo_folder_list_tag>
+            <a class="blog-nav-item" href="${BASE_PATH}/admin/login.htm">登录</a>
+        </nav>
+
+    </div>
+		</div>
 </body>
