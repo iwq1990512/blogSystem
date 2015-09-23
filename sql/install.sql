@@ -121,10 +121,14 @@ CREATE TABLE `media` (
 
 CREATE TABLE `user` (
   `userId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `openId` bigint(20) DEFAULT NULL COMMENT '公共用户ID，只有是QQ，微博等其它网站登录时才有。',
-  `type` varchar(20) DEFAULT NULL COMMENT '帐号类型：0 本站  2 QQ 3 微博',
+  `openId` bigint(20) DEFAULT NULL COMMENT '公共用户ID，只有是QQ，微博等其它网站登录时才有sourceAccount',
+  `token` varchar(150) NOT NULL DEFAULT '' COMMENT '三方登录token',
+  `refreshToken` varchar(150) NOT NULL DEFAULT '' COMMENT '三方登录refreshToken',
+  `sourceType` smallint(6) DEFAULT NULL COMMENT '帐号类型：1：本站 2：QQ  3：微博',
   `name` varchar(45) DEFAULT NULL COMMENT '用户名',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `refreshExpiredTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'refreshToken超时时间',
+  `reExpiresIn` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'token超时时间',
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='用户';
 

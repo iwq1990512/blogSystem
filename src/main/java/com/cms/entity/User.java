@@ -8,12 +8,11 @@ package com.cms.entity;
 
 import java.util.Date;
 
-import com.cms.constant.UserConstant;
 
 /**
  * 用户实体
  * 
- * @author zsy
+ * @author yuheng
  * 
  */
 
@@ -25,14 +24,14 @@ public class User {
 	private long userId;
 
 	/**
-	 * 公共用户ID
+	 * 公共用户ID，只有是QQ，微博等其它网站登录时才有sourceAccount
 	 */
 	private long openId;
 
 	/**
-	 * 帐号类型
+	 * 帐号类型：1：本站 2：QQ 3：微博
 	 */
-	private UserConstant.Type type;
+	private int sourceType;
 
 	/**
 	 * 用户名
@@ -43,6 +42,26 @@ public class User {
 	 * 时间
 	 */
 	private Date createTime;
+
+	/**
+	 * 	三方登录token
+	 */
+	private String token;
+
+	/**
+	 * 三方登录refreshToken
+	 */
+	private String refreshToken;
+
+	/**
+	 * token 超时时间
+	 */
+	private int reExpiresIn;
+
+	/**
+	 * refreshToken 超时时间
+	 */
+	private int refreshExpiredTime;
 
 	public long getUserId() {
 		return userId;
@@ -58,14 +77,6 @@ public class User {
 
 	public void setOpenId(long openId) {
 		this.openId = openId;
-	}
-
-	public UserConstant.Type getType() {
-		return type;
-	}
-
-	public void setType(UserConstant.Type type) {
-		this.type = type;
 	}
 
 	public String getName() {
@@ -84,4 +95,43 @@ public class User {
 		this.createTime = createTime;
 	}
 
+	public int getSourceType() {
+		return sourceType;
+	}
+
+	public void setSourceType(int sourceType) {
+		this.sourceType = sourceType;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
+
+	public int getReExpiresIn() {
+		return reExpiresIn;
+	}
+
+	public void setReExpiresIn(int reExpiresIn) {
+		this.reExpiresIn = reExpiresIn;
+	}
+
+	public int getRefreshExpiredTime() {
+		return refreshExpiredTime;
+	}
+
+	public void setRefreshExpiredTime(int refreshExpiredTime) {
+		this.refreshExpiredTime = refreshExpiredTime;
+	}
 }
