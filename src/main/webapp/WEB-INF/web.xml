@@ -73,7 +73,7 @@
 
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>shishuo.cms.root</param-value>
+		<param-value>cms.root</param-value>
 	</context-param>
 
 	<listener>
