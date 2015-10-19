@@ -24,9 +24,9 @@ public class CryptUtil {
             bs2 = cypher(TextUtil.toBytes(origOrEncoded), spice1);
             bs2 = ArrayUtils.addAll(bs2, spice1);
             bs2 = cypher(bs2, CYPHER_SPICE_DEFAULT);
-            return EncodeUtils.encodeURL(Util.encode(bs2));
+            return EncodeUtil.encodeURL(Util.encode(bs2));
         } else {
-            byte[] bs = Util.decode(EncodeUtils.decodeURL(origOrEncoded));
+            byte[] bs = Util.decode(EncodeUtil.decodeURL(origOrEncoded));
             if(bs.length <= spice_len) {
                 return null;
             } else {

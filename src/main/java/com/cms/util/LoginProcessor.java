@@ -1,9 +1,8 @@
 package com.cms.util;
 
 import com.cms.entity.User;
-import jdk.nashorn.internal.runtime.GlobalConstants;
-import org.apache.commons.lang3.ArrayUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
@@ -14,6 +13,7 @@ import java.util.Date;
 public class LoginProcessor {
 
     private static final String USER = "user";
+    public static final String COOKIE_SEP = ",";
     /**
      *
      * @param usr
@@ -40,7 +40,7 @@ public class LoginProcessor {
     public static String makeCookieUserStr(User user) {
         String value = "";
         if (user != null) {
-            String cookieContent = user.getUserId() + GlobalConstants.COOKIE_SEP
+            String cookieContent = user.getUserId() + COOKIE_SEP
                     + new Date().getTime();
             if (user != null) {
                 value = CryptUtil.encrypt(cookieContent, true);
@@ -49,5 +49,15 @@ public class LoginProcessor {
         return value;
     }
 
+    public static void setAutoLoginCookie(User usr, HttpServletResponse res, HttpServletRequest req) {
+        int age = 0;
+        String val = "";
+        if(usr != null) {
+            age = 31536000;
+            val = makeCookieUserStr(usr);
+        }
+
+        CookieUtils.setCookie(req, res, "user", val, age);
+    }
 
 }

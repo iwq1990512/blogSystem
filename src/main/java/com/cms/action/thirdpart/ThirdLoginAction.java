@@ -7,9 +7,7 @@ import com.cms.service.UserAuthService;
 import com.cms.service.UserService;
 import com.cms.tool.thirdpart.qq.QQAccessConfig;
 import com.cms.tool.thirdpart.qq.QQAccessHandler;
-import com.cms.util.HttpClientUtil;
-import com.cms.util.ThirdPartUtil;
-import com.cms.util.Util;
+import com.cms.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,10 +93,10 @@ public class ThirdLoginAction extends BaseAction {
             return ERROR_RESULT;
         }
         if(null != userAuthToken) {
-            CookieUtil.setAccessTokenCookie(request, response, userAuthToken);
+            CookieUtils.setAccessTokenCookie(request, response, userAuthToken);
             long uid = userAuthService.checkAuth(userAuthToken.token);
             User user = userService.getUserByUid(uid);
-            LoginProcessor.setAutoLoginCookie(user, request, response);
+            LoginProcessor.setAutoLoginCookie(user,  response, request);
             return SUCCESS;
         }else {
             return ERROR_RESULT;
