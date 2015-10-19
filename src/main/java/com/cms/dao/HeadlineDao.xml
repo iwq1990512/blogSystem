@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- Changsha Shishuo Network Technology Co., Ltd. All rights reserved. -->
-<!-- 长沙市师说网络科技有限公司 版权所有 -->
-<!-- http://www.shishuo.com -->
-
 <mapper namespace="com.cms.dao.HeadlineDao">
 
 	<!-- ############################## -->

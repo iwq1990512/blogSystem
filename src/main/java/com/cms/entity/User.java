@@ -1,8 +1,3 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
 
 package com.cms.entity;
 
@@ -26,7 +21,7 @@ public class User {
 	/**
 	 * 公共用户ID，只有是QQ，微博等其它网站登录时才有sourceAccount
 	 */
-	private long openId;
+	private String openId;
 
 	/**
 	 * 帐号类型：1：本站 2：QQ 3：微博
@@ -56,12 +51,12 @@ public class User {
 	/**
 	 * token 超时时间
 	 */
-	private int reExpiresIn;
+	private long reExpiresIn;
 
 	/**
 	 * refreshToken 超时时间
 	 */
-	private int refreshExpiredTime;
+	private long refreshExpiredTime;
 
 	public long getUserId() {
 		return userId;
@@ -71,11 +66,11 @@ public class User {
 		this.userId = userId;
 	}
 
-	public long getOpenId() {
+	public String getOpenId() {
 		return openId;
 	}
 
-	public void setOpenId(long openId) {
+	public void setOpenId(String openId) {
 		this.openId = openId;
 	}
 
@@ -119,19 +114,19 @@ public class User {
 		this.refreshToken = refreshToken;
 	}
 
-	public int getReExpiresIn() {
+	public long getReExpiresIn() {
 		return reExpiresIn;
 	}
 
-	public void setReExpiresIn(int reExpiresIn) {
+	public void setReExpiresIn(long reExpiresIn) {
 		this.reExpiresIn = reExpiresIn;
 	}
 
-	public int getRefreshExpiredTime() {
+	public long getRefreshExpiredTime() {
 		return refreshExpiredTime;
 	}
 
-	public void setRefreshExpiredTime(int refreshExpiredTime) {
+	public void setRefreshExpiredTime(long refreshExpiredTime) {
 		this.refreshExpiredTime = refreshExpiredTime;
 	}
 }

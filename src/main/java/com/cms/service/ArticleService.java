@@ -1,8 +1,3 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
 
 package com.cms.service;
 
@@ -39,20 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Zhangjiale
  * 
  */
-@Service
-public class ArticleService {
-
-	@Autowired
-	private ArticleDao articleDao;
-
-	@Autowired
-	private AdminService adminService;
-
-	@Autowired
-	private FolderService folderService;
-
-	@Autowired
-	private MediaService attachmentService;
+public interface ArticleService {
 
 	// ///////////////////////////////
 	// ///// 增加 ////////
@@ -72,52 +54,10 @@ public class ArticleService {
 	 * @throws UploadException
 	 * @throws IOException
 	 */
-	@CacheEvict(value = "article", allEntries = true)
 	public Article addArticle(long folderId, long adminId, String title,
 			String summary, ArticleConstant.Status status,String content,
-			MultipartFile file, String createTime)
-			throws FolderNotFoundException, UploadException,
-			IOException {
-		FolderVo folder = folderService.getFolderById(folderId);
-		Article article = new Article();
-		Date now = new Date();
-		String picture = "";
-		if (file != null && !file.isEmpty()) {
-			picture = MediaUtils.saveImage(file, folder.getWidth(),
-					folder.getHeight());
-		}
-		if (folder.getCheck().equals(FolderConstant.check.yes)) {
-			article.setCheck(ArticleConstant.check.init);
-		} else {
-			article.setCheck(ArticleConstant.check.yes);
-		}
-		article.setFolderId(folder.getFolderId());
-		article.setPath(folder.getPath());
-		article.setAdminId(adminId);
-		article.setTitle(title);
-		article.setSummary(summary);
-		article.setContent(content);
-		article.setViewCount(0);
-		article.setCommentCount(0);
-		article.setPicture(picture);
-		article.setStatus(status);
-		if (StringUtils.isBlank(createTime)) {
-			article.setCreateTime(now);
-		} else {
-			SimpleDateFormat sdf = new SimpleDateFormat(
-					"yyyy-MM-dd");
-			Date date;
-			try {
-				date = sdf.parse(createTime);
-			} catch (ParseException e) {
-				date = now;
-			}
-			article.setCreateTime(date);
-		}
-		article.setUpdateTime(now);
-		articleDao.addArticle(article);
-		return articleDao.getArticleById(article.getArticleId());
-	}
+			MultipartFile file, String createTime)throws FolderNotFoundException, UploadException,
+			IOException ;
 
 	// ///////////////////////////////
 	// ///// 刪除 ////////
@@ -125,14 +65,10 @@ public class ArticleService {
 
 	/**
 	 * 删除文件
-	 * 
-	 * @param fileId
+	 *
 	 * @return boolean
 	 */
-	@CacheEvict(value = "article", allEntries = true)
-	public boolean deleteArticleById(long articleId) {
-		return articleDao.deleteArticleById(articleId);
-	}
+	public boolean deleteArticleById(long articleId);
 
 	// ///////////////////////////////
 	// ///// 修改 ////////
@@ -140,14 +76,8 @@ public class ArticleService {
 
 	/**
 	 * 修改文件
-	 * 
-	 * @param fileId
 	 * @param folderId
 	 * @param adminId
-	 * @param picture
-	 * @param name
-	 * @param content
-	 * @param type
 	 * @param status
 	 * @return
 	 * @throws UploadException
@@ -155,82 +85,29 @@ public class ArticleService {
 	 * @throws IOException
 	 * @throws FolderNotFoundException 
 	 */
-	@CacheEvict(value = "article", allEntries = true)
 	public Article updateArticle(long articleId, long folderId,
 			long adminId, String title, String summary,
 			String content, ArticleConstant.Status status,MultipartFile file,
-			String time) throws UploadException, IOException, FolderNotFoundException {
-		Date now = new Date();
-		Article article = articleDao.getArticleById(articleId);
-		FolderVo folder = folderService.getFolderById(folderId);
-		String picture = article.getPicture();
-		if (file != null && !file.isEmpty()) {
-			picture = MediaUtils.saveImage(file, folder.getWidth(),
-					folder.getHeight());
-		}
-		article.setFolderId(folder.getFolderId());
-		article.setPath(folder.getPath());
-		article.setAdminId(adminId);
-		article.setTitle(title);
-		article.setSummary(summary);
-		article.setContent(content);
-		article.setViewCount(0);
-		article.setCommentCount(0);
-		article.setPicture(picture);
-		article.setStatus(status);
-		if (article.getCheck().equals(ArticleConstant.check.no)) {
-			article.setCheck(ArticleConstant.check.init);
-		}
-		if (StringUtils.isBlank(time)) {
-			article.setCreateTime(now);
-		} else {
-			SimpleDateFormat sdf = new SimpleDateFormat(
-					"yyyy-MM-dd");
-			Date date;
-			try {
-				date = sdf.parse(time);
-			} catch (ParseException e) {
-				date = now;
-			}
-			article.setCreateTime(date);
-		}
-		articleDao.updateArticle(article);
-		return article;
-	}
-
+			String time) throws UploadException, IOException, FolderNotFoundException;
 	/**
 	 * 更新浏览人数
 	 * 
-	 * @param fileId
-	 * @param viewCount
+	 * @param articleId
+	 * @param nowViewCount
 	 * 
 	 */
-	public void updateViewCount(long articleId, int nowViewCount) {
-		articleDao.updateViewCount(articleId, nowViewCount + 1);
-	}
-
+	public void updateViewCount(long articleId, int nowViewCount) ;
 	// ///////////////////////////////
 	// ///// 查詢 ////////
 	// ///////////////////////////////
 
 	/**
 	 * 得到文件
-	 * 
-	 * @param fileId
+	 *
 	 * @return File
 	 * @throws ArticleNotFoundException
 	 */
-	@Cacheable(value = "article", key = "'getArticleById_'+#articleId")
-	public ArticleVo getArticleById(long articleId)
-			throws ArticleNotFoundException {
-		ArticleVo articleVo = articleDao.getArticleById(articleId);
-		if (articleVo == null) {
-			throw new ArticleNotFoundException(articleId
-					+ " 文件，不存在");
-		} else {
-			return articleVo;
-		}
-	}
+	public ArticleVo getArticleById(long articleId) throws ArticleNotFoundException;
 
 	/**
 	 * 得到目录的显示的文件分页
@@ -239,76 +116,19 @@ public class ArticleService {
 	 * @return pageVo
 	 * @throws FolderNotFoundException
 	 */
-	@Cacheable(value = "article")
 	public PageVo<ArticleVo> getArticlePageByFolderId(long folderId,
-			int pageNum, int rows) throws FolderNotFoundException {
-		PageVo<ArticleVo> pageVo = new PageVo<ArticleVo>(pageNum);
-		FolderVo folder = folderService.getFolderById(folderId);
-		pageVo.setRows(rows);
-		pageVo.setCount(articleDao
-				.getArticleCountOfDisplayByPath(folder
-						.getPath()));
-		List<ArticleVo> articlelist = articleDao
-				.getArticleListOfDisplayByPath(
-						folder.getPath(),
-						pageVo.getOffset(),
-						pageVo.getRows());
-		for (ArticleVo artcle : articlelist) {
-			FolderVo artcleFolder = folderService
-					.getFolderById(artcle.getFolderId());
-			artcle.setFolder(artcleFolder);
-		}
-		pageVo.setList(articlelist);
-		return pageVo;
-	}
+			int pageNum, int rows) throws FolderNotFoundException ;
 
 	/**
 	 * 获取某种文件的分页
-	 * 
-	 * @param type
-	 * @param status
+	 *
 	 * @param pageNum
 	 * @return PageVo<File>
 	 * @throws FolderNotFoundException
 	 * 
 	 */
 	public PageVo<ArticleVo> getArticlePageByFolderId(long adminId,
-			long folderId, ArticleConstant.check check, int pageNum)
-			throws FolderNotFoundException {
-		PageVo<ArticleVo> pageVo = new PageVo<ArticleVo>(pageNum);
-		pageVo.setRows(20);
-		List<ArticleVo> list = new ArrayList<ArticleVo>();
-		int count = 0;
-		if (folderId == 0) {
-			count = this.getArticleCountByAdminIdAndFolderId(
-					adminId, 0, check);
-			list = this.getArticleListByAdminIdAndFolderId(adminId,
-					0, check, pageVo.getOffset(),
-					pageVo.getRows());
-		} else {
-			list = this.getArticleListByAdminIdAndFolderId(adminId,
-					folderId, check, pageVo.getOffset(),
-					pageVo.getRows());
-			count = this.getArticleCountByAdminIdAndFolderId(
-					adminId, folderId, check);
-		}
-		for (ArticleVo article : list) {
-			try {
-				article.setFolder(folderService
-						.getFolderById(article
-								.getFolderId()));
-				article.setFolderPathList(folderService
-						.getFolderPathListByFolderId(article
-								.getFolderId()));
-			} catch (FolderNotFoundException e) {
-				article.setFolder(new Folder());
-			}
-		}
-		pageVo.setList(list);
-		pageVo.setCount(count);
-		return pageVo;
-	}
-
+			long folderId, ArticleConstant.check check, int pageNum) throws FolderNotFoundException ;
 	/**
 	 * @param adminId
 	 * @param folderId
@@ -319,17 +139,7 @@ public class ArticleService {
 	 */
 	public List<ArticleVo> getArticleListByAdminIdAndFolderId(long adminId,
 			long folderId, ArticleConstant.check check,
-			long offset, long rows) throws FolderNotFoundException {
-		String path = "";
-		if (folderId != 0) {
-			Folder folder = folderService.getFolderById(folderId);
-			path = folder.getPath();
-		}
-		List<ArticleVo> articleList = articleDao
-				.getArticleListByAdminIdAndPath(adminId, path,
-						check, offset, rows);
-		return articleList;
-	}
+			long offset, long rows) throws FolderNotFoundException ;
 
 	/**
 	 * @param adminId
@@ -338,32 +148,16 @@ public class ArticleService {
 	 * @throws FolderNotFoundException
 	 */
 	public int getArticleCountByAdminIdAndFolderId(long adminId,
-			long folderId, ArticleConstant.check check)
-			throws FolderNotFoundException {
-		String path = "";
-		if (folderId != 0) {
-			Folder folder = folderService.getFolderById(folderId);
-			path = folder.getPath();
-		}
-		return articleDao.getArticleCountByAdminIdAndPath(adminId,
-				path, check);
-	}
-
+			long folderId, ArticleConstant.check check) throws FolderNotFoundException ;
 	/**
 	 * @param folderId
 	 * @return
 	 * @throws FolderNotFoundException
 	 */
-	public int getArticleCountByFolderId(long folderId)
-			throws FolderNotFoundException {
-		return articleDao.getArticleCountByFolderId(folderId);
-	}
+	public int getArticleCountByFolderId(long folderId) throws FolderNotFoundException ;
 
-	@CacheEvict(value = "article", allEntries = true)
 	public void updateCheck(long articleId,
-			ArticleConstant.check check) {
-		articleDao.updateCheck(articleId, check);
-	}
+			ArticleConstant.check check) ;
 
 	/**
 	 * @param path
@@ -372,11 +166,5 @@ public class ArticleService {
 	 * @return
 	 */
 	public List<ArticleVo> getArticleListOfDisplayByPath(String path,
-			int offset, int rows) {
-		List<ArticleVo> articlelist = articleDao
-				.getArticleListOfDisplayByPath(path, offset,
-						rows);
-		return articlelist;
-	}
-
+			int offset, int rows) ;
 }

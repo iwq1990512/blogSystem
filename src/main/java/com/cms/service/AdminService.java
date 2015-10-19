@@ -1,8 +1,3 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
 
 package com.cms.service;
 
@@ -32,33 +27,16 @@ import com.cms.util.AuthUtils;
  * 
  */
 @Service
-public class AdminService {
-
-	@Autowired
-	private AdminDao adminDao;
-
-	// ///////////////////////////////
-	// ///// 增加 ////////
-	// ///////////////////////////////
+public interface AdminService {
 
 	/**
 	 * 添加管理员
 	 * 
-	 * @param email
 	 * @param name
 	 * @param password
 	 * @return Admin
 	 */
-	public Admin addAdmin(String name, String password)
-			throws AuthException {
-		Date now = new Date();
-		Admin admin = new Admin();
-		admin.setName(name);
-		admin.setPassword(AuthUtils.getPassword(password));
-		admin.setCreateTime(now);
-		adminDao.addAdmin(admin);
-		return admin;
-	}
+	public Admin addAdmin(String name, String password)throws AuthException ;
 
 	// ///////////////////////////////
 	// ///// 刪除 ////////
@@ -70,9 +48,7 @@ public class AdminService {
 	 * @param adminId
 	 * @return Integer
 	 */
-	public int deleteAdmin(long adminId) {
-		return adminDao.deleteAdmin(adminId);
-	}
+	public int deleteAdmin(long adminId);
 
 	// ///////////////////////////////
 	// ///// 修改 ////////
@@ -82,18 +58,12 @@ public class AdminService {
 	 * 修改管理员资料
 	 * 
 	 * @param adminId
-	 * @param name
 	 * @param password
-	 * @param status
 	 * @return Admin
 	 * @throws AuthException
 	 */
 
-	public void updateAdminByAmdinId(long adminId, String password)
-			throws AuthException {
-		String pwd = AuthUtils.getPassword(password);
-		adminDao.updateAdminByadminId(adminId, pwd);
-	}
+	public void updateAdminByAmdinId(long adminId, String password)throws AuthException ;
 
 	// ///////////////////////////////
 	// ///// 查詢 ////////
@@ -101,42 +71,19 @@ public class AdminService {
 
 	/**
 	 * 管理员登陆
-	 * 
-	 * @param email
+	 *
 	 * @param password
 	 * @param request
 	 * @throws IOException
 	 */
 	public void adminLogin(String name, String password,
-			HttpServletRequest request) throws AuthException,
-			IOException {
-		AdminVo admin = adminDao.getAdminByName(name);
-		if (admin == null) {
-			throw new AuthException("邮箱或密码错误");
-		}
-		String loginPassword = AuthUtils.getPassword(password);
-		if (loginPassword.equals(admin.getPassword())) {
-			HttpSession session = request.getSession();
-			admin.setPassword("");
-			if (name.equals(PropertyUtils
-					.getValue("cms.admin"))) {
-				admin.setAdmin(true);
-			} else {
-				admin.setAdmin(false);
-			}
-			session.setAttribute(SystemConstant.SESSION_ADMIN,
-					admin);
-		} else {
-			throw new AuthException("邮箱或密码错误");
-		}
-	}
+			HttpServletRequest request)throws AuthException ,
+			IOException ;
 
 	/**
 	 * 通过Id获得指定管理员资料
 	 */
-	public Admin getAdminById(long adminId) {
-		return adminDao.getAdminById(adminId);
-	}
+	public Admin getAdminById(long adminId);
 
 	/**
 	 * 获得所有管理员的分页数据
@@ -145,48 +92,28 @@ public class AdminService {
 	 * @param rows
 	 * @return List<Admin>
 	 */
-	public List<Admin> getAllList(long offset, long rows) {
-		return adminDao.getAllList(offset, rows);
-	}
+	public List<Admin> getAllList(long offset, long rows);
 
 	/**
 	 * 获得所有管理员的数量
 	 * 
 	 * @return Integer
 	 */
-	public int getAllListCount() {
-		return adminDao.getAllListCount();
-	}
+	public int getAllListCount();
 
 	/**
 	 * 获得所有管理员的分页
 	 * 
-	 * @param Integer
 	 * @return PageVo<Admin>
 	 */
-	public PageVo<Admin> getAllListPage(int pageNum) {
-		PageVo<Admin> pageVo = new PageVo<Admin>(pageNum);
-		pageVo.setRows(20);
-		List<Admin> list = this.getAllList(pageVo.getOffset(),
-				pageVo.getRows());
-		pageVo.setList(list);
-		pageVo.setCount(this.getAllListCount());
-		return pageVo;
-	}
+	public PageVo<Admin> getAllListPage(int pageNum);
 
 	/**
 	 * 通过email获得管理员资料
 	 * 
-	 * @param email
 	 * @return Admin
 	 */
-	public Admin getAdminByName(String name) {
-		return adminDao.getAdminByName(name);
-	}
+	public Admin getAdminByName(String name);
 
-	public long getSuperAdminId() {
-		Admin admin = getAdminByName(PropertyUtils
-				.getValue("cms.admin"));
-		return admin.getAdminId();
-	}
+	public long getSuperAdminId() ;
 }

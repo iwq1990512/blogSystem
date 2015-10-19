@@ -1,18 +1,7 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
 
 package com.cms.service;
 
-import java.util.Date;
-
-import com.cms.dao.ConfigDao;
 import com.cms.entity.Config;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,10 +11,7 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-public class ConfigService {
-
-	@Autowired
-	private ConfigDao configDao;
+public interface ConfigService {
 
 	// ///////////////////////////////
 	// ///// 增加 ////////
@@ -38,14 +24,7 @@ public class ConfigService {
 	 * @param value
 	 * @return Config
 	 */
-	public Config addConfig(String key, String value) {
-		Config config = new Config();
-		config.setKey(key);
-		config.setValue(value);
-		config.setCreateTime(new Date());
-		configDao.addConfig(config);
-		return config;
-	}
+	public Config addConfig(String key, String value) ;
 
 	// ///////////////////////////////
 	// ///// 刪除 ////////
@@ -57,10 +36,7 @@ public class ConfigService {
 	 * @param key
 	 * @return Integer
 	 */
-	@CacheEvict(value = "config")
-	public int deleteConfigByKey(String key) {
-		return configDao.deleteConfig(key);
-	}
+	public int deleteConfigByKey(String key);
 
 	// ///////////////////////////////
 	// ///// 修改 ////////
@@ -72,40 +48,17 @@ public class ConfigService {
 	 * @param key
 	 * @param value
 	 */
-	@CacheEvict(value = "config")
-	public Config updagteConfigByKey(String key, String value) {
-		Config config = configDao.getConfigByKey(key);
-		config.setValue(value);
-		configDao.updateConfig(config);
-		this.getStringByKey(key);
-		return config;
-	}
+	public Config updagteConfigByKey(String key, String value);
 
 	/**
 	 * @param key
 	 * @return
 	 */
-	@Cacheable(value = "config")
-	public String getStringByKey(String key) {
-		Config config = configDao.getConfigByKey(key);
-		if (config == null) {
-			return "";
-		} else {
-			return config.getValue();
-		}
-	}
+	public String getStringByKey(String key) ;
 
 	/**
 	 * @param key
 	 * @return
 	 */
-	@Cacheable(value = "config")
-	public int getIntKey(String key) {
-		Config config = configDao.getConfigByKey(key);
-		if (config == null) {
-			return 0;
-		} else {
-			return Integer.parseInt(config.getValue());
-		}
-	}
+	public int getIntKey(String key) ;
 }

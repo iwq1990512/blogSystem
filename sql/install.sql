@@ -121,7 +121,7 @@ CREATE TABLE `media` (
 
 CREATE TABLE `user` (
   `userId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `openId` bigint(20) DEFAULT NULL COMMENT '公共用户ID，只有是QQ，微博等其它网站登录时才有sourceAccount',
+  `openId` varchar(30) DEFAULT NULL COMMENT '公共用户ID，只有是QQ，微博等其它网站登录时才有sourceAccount',
   `token` varchar(150) NOT NULL DEFAULT '' COMMENT '三方登录token',
   `refreshToken` varchar(150) NOT NULL DEFAULT '' COMMENT '三方登录refreshToken',
   `sourceType` smallint(6) DEFAULT NULL COMMENT '帐号类型：1：本站 2：QQ  3：微博',
@@ -132,6 +132,21 @@ CREATE TABLE `user` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='用户';
 
+CREATE TABLE `user_auth` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uid` bigint(20) NOT NULL COMMENT '用户id',
+  `token` varchar(40) NOT NULL COMMENT '令牌',
+  `token_expire` datetime NOT NULL COMMENT '令牌有效期(推荐7天)',
+  `refresh_token` varchar(40) NOT NULL COMMENT '刷新令牌',
+  `refresh_token_expire` datetime NOT NULL COMMENT '刷新令牌有效期(推荐30天)',
+  `is_delete` int(11) NOT NULL COMMENT '是否已经删除: 0未删除，1删除',
+  `createTime` datetime NOT NULL COMMENT '创建时间',
+  `modifiedTime` datetime NOT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token_UNIQUE` (`token`),
+  UNIQUE KEY `refresh_token_UNIQUE` (`refresh_token`),
+  KEY `uid` (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=6797 DEFAULT CHARSET=utf8 COMMENT='认证中心'
 
 INSERT INTO `admin` VALUES (1,'zy','6158f875bf826e15923779855b6eef2e','2012-08-08 00:00:00');
 

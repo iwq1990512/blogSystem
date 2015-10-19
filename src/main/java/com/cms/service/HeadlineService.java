@@ -14,54 +14,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class HeadlineService {
-
-	@Autowired
-	private HeadlineDao headlineDao;
-
-	@Autowired
-	private ConfigService configService;
+public interface HeadlineService {
 
 	public Headline addHeadline(MultipartFile multipartFile, String name,
-			String url) throws UploadException, IOException {
-		Headline headline = new Headline();
-		String picture = MediaUtils.saveImage(multipartFile,
-				configService.getIntKey("headline_image_width"),
-				configService.getIntKey("headline_image_height"));
-		headline.setName(name);
-		headline.setPicture(picture);
-		headline.setUrl(url);
-		headline.setSort(0);
-		headline.setCreateTime(new Date());
-		headlineDao.addHeadline(headline);
-		return headline;
-	}
+			String url)throws UploadException, IOException;
 
-	public List<HeadlineVo> getHeadlineList() {
-		return headlineDao.getHeadlineList();
-	}
+	public List<HeadlineVo> getHeadlineList();
 
 	public int updateHeadlineById(long headlineId, String name,
-			MultipartFile file, String url) throws UploadException, IOException {
-		String picture = this.getHeadlineById(headlineId).getPicture();
-		if (file != null && !file.isEmpty()) {
-			picture = MediaUtils.saveImage(file,
-					configService.getIntKey("headline_image_width"),
-					configService.getIntKey("headline_image_height"));
-		}
-		return headlineDao.updateHeadlineById(headlineId, name, picture, url);
-	}
+			MultipartFile file, String url) throws UploadException, IOException ;
+	public HeadlineVo getHeadlineById(long headlineId);
 
-	public HeadlineVo getHeadlineById(long headlineId) {
-		return headlineDao.getHeadlineById(headlineId);
-	}
+	public void deleteHeadline(long headlineId, String pictureUrl);
 
-	public void deleteHeadline(long headlineId, String pictureUrl) {
-		headlineDao.deleteHeadline(headlineId);
-		MediaUtils.deleteFile(pictureUrl);
-	}
-
-	public void updateSortById(long headlineId, int sort) {
-		headlineDao.updateSortById(headlineId, sort);
-	}
+	public void updateSortById(long headlineId, int sort);
 }

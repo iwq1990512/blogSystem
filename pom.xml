@@ -169,12 +169,16 @@
 			<scope>provided</scope>
 			<version>7.0.56</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jsp-api</artifactId>
 			<scope>provided</scope>
 			<version>7.0.57</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.6</version>
 		</dependency>
 	</dependencies>
 
