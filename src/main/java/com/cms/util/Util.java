@@ -1,5 +1,9 @@
 package com.cms.util;
 
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -85,4 +89,15 @@ public class Util {
         }
     }
 
+    public static String encode(byte[] bytes) {
+        return (new BASE64Encoder()).encode(bytes);
+    }
+
+    public static byte[] decode(String base64Str) {
+        try {
+            return (new BASE64Decoder()).decodeBuffer(base64Str);
+        } catch (IOException var2) {
+            throw new RuntimeException(var2);
+        }
+    }
 }

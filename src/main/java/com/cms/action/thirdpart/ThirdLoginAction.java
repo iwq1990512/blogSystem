@@ -89,16 +89,16 @@ public class ThirdLoginAction extends BaseAction {
             this.user = uss;
         }
         try {
-            userAuthToken = userAuthService.loginThirdPart(user.getUserId(), null);
+            userAuthToken = userAuthService.loginThirdPart(user.getUserId());
         }catch(Exception e) {
-            logger.error("第三方登录成功后auth登录失败", e);
+            logger.error("第三方登录成功后auth验证失败", e);
             return ERROR_RESULT;
         }
         if(null != userAuthToken) {
             CookieUtil.setAccessTokenCookie(request, response, userAuthToken);
             long uid = userAuthService.checkAuth(userAuthToken.token);
             User user = userService.getUserByUid(uid);
-            LoginProcessor.setAutoLoginCookie(user, getRes(), getReq());
+            LoginProcessor.setAutoLoginCookie(user, request, response);
             return SUCCESS;
         }else {
             return ERROR_RESULT;
