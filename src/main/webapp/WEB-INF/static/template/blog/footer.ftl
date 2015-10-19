@@ -2,7 +2,7 @@
 	</div>
 	<!-- /.container -->
 <#--	<div class="blog-footer">
-		<p class="copyright"><a style="color:#808ca4;" target="_blank" href="http://shishuo.com/shishuocms">自豪地采用师说CMS核心</a></p>
+		<p class="copyright"><a style="color:#808ca4;" target="_blank" href="http://shishuo.com/shishuocms">自豪地采用CMS核心</a></p>
 	</div>-->
 	<!-- Bootstrap core JavaScript
     ================================================== -->
