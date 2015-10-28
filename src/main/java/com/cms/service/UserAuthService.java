@@ -1,31 +1,60 @@
 package com.cms.service;
 
+import com.cms.dao.UserAuthDao;
 import com.cms.entity.UserAuthToken;
+import com.cms.entity.UserAuthTokenRecord;
 import com.cms.exception.AuthException;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.Calendar;
 
 /**
  * Created by yuheng on 2015/10/19.
  */
-public interface UserAuthService {
-    /**
-     * 三方认证登录, 这个接口只允许第三方登录用户使用, 调用方需要通过其他接口获取三方用户的uid
-     *
-     * @param uid
-     * @throws AuthException
-     *             查找不到用户时
-     */
-    public UserAuthToken loginThirdPart(long uid) throws AuthException;
+@Service
+public class UserAuthService {
+    private final Logger logger = Logger.getLogger(UserAuthService.class);
+
+    @Autowired
+    private TokenGenerateService tokenGenerateService;
+    @Autowired
+    private UserAuthDao userAuthDao;
+
+    public UserAuthToken loginThirdPart(long uid) throws AuthException {
+        UserAuthToken userAuthToken = new UserAuthToken();
+        userAuthToken = this.tokenGenerateService.generateToken();
+        this.insertToken(uid, userAuthToken);
+        this.logger.info("login with third:{}, userAuthToken: {}" + uid + userAuthToken);
+        return userAuthToken;
+    }
+
+    public Long checkAuth(String token) {
+        return null;
+    }
 
     /**
-     * 检测token是否合法, 如果合法, 返回uid
+     * 保存token到数据库
      *
+     * @param uid
      * @param token
+     *            可选选项, 会保存入库
      * @return
-     * @throws AuthException
-     *             token无效或过期
      */
-    public Long checkAuth(String token);
+    private void insertToken(long uid, UserAuthToken token) {
+        Calendar cal = Calendar.getInstance();
+        UserAuthTokenRecord record = new UserAuthTokenRecord();
+        record.createTime = cal.getTime();
+        record.modifiedTime = cal.getTime();
+        record.isDelete = 0;
+        record.refreshToken = token.refreshToken;
+        record.refreshTokenExpire = token.refreshTokenExpire;
+        record.token = token.token;
+        record.tokenExpire = token.tokenExpire;
+        record.uid = uid;
+        this.userAuthDao.insert(record);
+
+    }
 
 }

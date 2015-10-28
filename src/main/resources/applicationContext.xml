@@ -31,7 +31,7 @@
 
 	<task:annotation-driven />
 
-	<cache:annotation-driven key-generator="KeyGeneratorService"/>
+	<cache:annotation-driven key-generator="keyGeneratorService"/>
 
 	<mvc:resources mapping="/static/**" location="/WEB-INF/static/"
 		cache-period="31556926" />
