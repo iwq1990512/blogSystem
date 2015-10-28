@@ -54,8 +54,8 @@ public class TokenGenerateService {
     private void resetSecureRandom() {
         this.lock.lock();
         try {
-            this.random = SecureRandom.getInstance("NativePRNGNonBlocking");
-//            this.random = SecureRandom.getInstanceStrong(); // for windows
+           // this.random = SecureRandom.getInstance("NativePRNGNonBlocking");
+            this.random = SecureRandom.getInstanceStrong(); // for windows
             this.random.generateSeed(32);
         } catch (NoSuchAlgorithmException e) {
             this.logger.error("can not find algorithm to generate token", e);
