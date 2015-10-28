@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * token对象
+ * token瀵硅薄
  *
  * @author yuheng
  */
 public class UserAuthToken implements Serializable {
     private static final long serialVersionUID = -8866572769692990091L;
     public String token;
-    public Date tokenExpire; // 单位毫秒
+    public Date tokenExpire; // 鍗曚綅姣
     public String refreshToken;
-    public Date refreshTokenExpire; // 单位毫秒
+    public Date refreshTokenExpire; // 鍗曚綅姣
 
     @Override
     public String toString() {

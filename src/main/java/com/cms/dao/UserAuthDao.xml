@@ -7,11 +7,11 @@
 	<!-- ###### 增加 ###### -->
 	<!-- ############################## -->
 
-	<insert id="addAdmin" parameterType="com.cms.entity.Admin">
+	<insert id="insert" parameterType="com.cms.entity.UserAuthTokenRecord">
 		insert into
-		admin(name,password,createTime)
-		value(#{name},#{password},#{createTime})
-		<selectKey resultType="long" keyProperty="adminId">
+		user_auth(uid,token,tokenExpire,refreshToken,refreshTokenExpire,isDelete,createTime,modifiedTime)
+		value(#{uid},#{token},#{tokenExpire},#{refreshToken},#{refreshTokenExpire},#{isDelete},#{createTime},#{modifiedTime})
+		<selectKey resultType="long" keyProperty="id">
 			SELECT
 			LAST_INSERT_ID()
 		</selectKey>
@@ -21,22 +21,22 @@
 	<!-- ###### 删除 ###### -->
 	<!-- ############################## -->
 
-	<delete id="deleteAdmin" parameterType="long">
+	<!--<delete id="deleteAdmin" parameterType="long">
 		delete from admin where
 		adminId=#{adminId}
-	</delete>
+	</delete>-->
 
 	<!-- ############################## -->
 	<!-- ###### 修改 ###### -->
 	<!-- ############################## -->
 
-	<update id="updateAdminByadminId">
+	<!--<update id="updateAdminByadminId">
 		update admin set password=#{password}
 		where adminId=#{adminId}
 	</update>
-	<!-- ############################## -->
-	<!-- ###### 查询 ###### -->
-	<!-- ############################## -->
+	&lt;!&ndash; ############################## &ndash;&gt;
+	&lt;!&ndash; ###### 查询 ###### &ndash;&gt;
+	&lt;!&ndash; ############################## &ndash;&gt;
 
 	<select id="getAllList" resultType="com.cms.entity.Admin">
 		select * from admin limit
@@ -56,6 +56,6 @@
 	<select id="getAdminByName" resultType="com.cms.entity.vo.AdminVo">
 		select * from admin
 		where name=#{name}
-	</select>
+	</select>-->
 
 </mapper>  

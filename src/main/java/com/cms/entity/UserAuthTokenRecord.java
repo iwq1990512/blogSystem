@@ -3,7 +3,7 @@ package com.cms.entity;
 import java.util.Date;
 
 /**
- * Êı¾İ¿âmodel
+ * æ•°æ®åº“model
  *
  * @author
  */

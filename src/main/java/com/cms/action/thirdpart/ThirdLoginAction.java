@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -30,7 +31,7 @@ public class ThirdLoginAction extends BaseAction {
     private User user;
     private String source; //登录来源
     private String creurl = ""; //定制第三方登录完成后回到的地址
-    private String crecode = ""; //定制第三方登录完成后回调的地址临时票据
+   // private String crecode = ""; //定制第三方登录完成后回调的地址临时票据
 
     @Autowired
     private UserService userService;
@@ -38,14 +39,29 @@ public class ThirdLoginAction extends BaseAction {
     private UserAuthService userAuthService;
 
     @RequestMapping(value = "/login.htm", method = RequestMethod.GET)
-    public String login(HttpServletRequest request) {
+    public String login(HttpServletRequest request , HttpSession session) {
+        session.setAttribute("creurl", request.getHeader("Referer"));
         source = request.getParameter("source");
-
         if (ThirdPartUtil.SOURCE_QQ.equalsIgnoreCase(source)){
-            return loginQQ();
+            return "redirect:" + loginQQ();
         }
-
         return null;
+    }
+
+    /**
+     * 第三方登录回调
+     * @return
+     */
+    @RequestMapping(value = "/thirdLoginCallback.htm", method = RequestMethod.GET)
+    public String thirdLoginCallback(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+        creurl = (String)session.getAttribute("creurl");
+        session.removeAttribute("creurl");
+        source = request.getParameter("source");
+        String result = null;
+        if(ThirdPartUtil.SOURCE_QQ.equalsIgnoreCase(source)) {
+            result = qqCallback(request, response);
+        }
+        return "redirect:" + result;
     }
 
     private String qqCallback(HttpServletRequest request, HttpServletResponse response) {
@@ -56,18 +72,17 @@ public class ThirdLoginAction extends BaseAction {
             User user = null;
             user = qqAccessHandler.handleUser();
             this.user = user;
-            return loginProcessor(user, request, response);
         }catch(Exception e) {
             logger.error("QQ第三方登录callback异常", e);
-            return ERROR_RESULT;
         }
+        return loginProcessor(user, request, response);
     }
 
 
     private String loginProcessor(User uss, HttpServletRequest request, HttpServletResponse response) {
         String clientIp = HttpClientUtil.getIpAddr(request);
         if(uss == null || StringUtils.isBlank(uss.getOpenId()) || 0 >= uss.getSourceType()) {
-            return ERROR_RESULT;
+            return null;
         }
         int sourceType = uss.getSourceType();
         User cmsUser = null;
@@ -90,16 +105,16 @@ public class ThirdLoginAction extends BaseAction {
             userAuthToken = userAuthService.loginThirdPart(user.getUserId());
         }catch(Exception e) {
             logger.error("第三方登录成功后auth验证失败", e);
-            return ERROR_RESULT;
+            return null;
         }
         if(null != userAuthToken) {
             CookieUtils.setAccessTokenCookie(request, response, userAuthToken);
             long uid = userAuthService.checkAuth(userAuthToken.token);
             User user = userService.getUserByUid(uid);
             LoginProcessor.setAutoLoginCookie(user,  response, request);
-            return SUCCESS;
+            return creurl;
         }else {
-            return ERROR_RESULT;
+            return null;
         }
     }
 

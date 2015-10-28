@@ -30,6 +30,11 @@ public class UserAuthServiceImpl implements UserAuthService{
         return userAuthToken;
     }
 
+    @Override
+    public Long checkAuth(String token) {
+        return null;
+    }
+
     /**
      * 保存token到数据库
      *

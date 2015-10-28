@@ -119,7 +119,7 @@ CREATE TABLE `media` (
   KEY `idx_kind` (`kind`,`kindId`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=ucs2 ROW_FORMAT=COMPACT;
 
-CREATE TABLE `user` (
+CREATE TABLE `cms_user` (
   `userId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
   `openId` varchar(30) DEFAULT NULL COMMENT '公共用户ID，只有是QQ，微博等其它网站登录时才有sourceAccount',
   `token` varchar(150) NOT NULL DEFAULT '' COMMENT '三方登录token',

@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * token生成服务
+ * token鐢熸垚鏈嶅姟
  * @author yuheng
  */
 @Service
@@ -38,7 +38,7 @@ public class TokenGenerateService {
         this.resetSecureRandom();
     }
     /**
-     * 重新生成token
+     * 閲嶆柊鐢熸垚token
      *
      * @return
      */

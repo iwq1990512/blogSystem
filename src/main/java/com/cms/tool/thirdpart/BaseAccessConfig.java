@@ -56,7 +56,6 @@ public class BaseAccessConfig implements IAccessConfig {
         Map<String,String> m = new HashMap<String, String>(params);
         String source = m.get("source");
         String cb = cburl.replace("#s", m.remove("source"));
-        cb = cb.replace("#p", m.remove("phone"));
         String key = null;
         String value = null;
         StringBuilder urlsb = new StringBuilder(cb);

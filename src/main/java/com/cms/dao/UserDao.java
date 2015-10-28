@@ -1,6 +1,7 @@
 package com.cms.dao;
 
 import com.cms.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -28,7 +29,7 @@ public interface UserDao {
      * @param userId
      * @return
      */
-    public User getUserById(long userId);
+    public User getUserById(@Param("userId")long userId);
 
     /**
      * 修改
@@ -42,5 +43,5 @@ public interface UserDao {
      * @param sourceType
      * @return
      */
-    public User getUserBySourceSys(String openId, int sourceType);
+    public User getUserBySourceSys(@Param("openId")String openId, @Param("sourceType")int sourceType);
 }

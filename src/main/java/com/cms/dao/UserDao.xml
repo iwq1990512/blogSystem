@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.cms.dao.AdminDao">
+<mapper namespace="com.cms.dao.UserDao">
 
 	<!-- ############################## -->
 	<!-- ###### 增加 ###### -->
 	<!-- ############################## -->
 
-	<insert id="addAdmin" parameterType="com.cms.entity.Admin">
+	<insert id="add" parameterType="com.cms.entity.User">
 		insert into
-		admin(name,password,createTime)
+		cms_user(openId, token, refreshToken, sourceType, name, createTime, refreshExpiredTime, reExpiresIn)
 		value(#{name},#{password},#{createTime})
-		<selectKey resultType="long" keyProperty="adminId">
+		<selectKey resultType="long" keyProperty="userId">
 			SELECT
 			LAST_INSERT_ID()
 		</selectKey>
@@ -21,41 +21,32 @@
 	<!-- ###### 删除 ###### -->
 	<!-- ############################## -->
 
-	<delete id="deleteAdmin" parameterType="long">
-		delete from admin where
-		adminId=#{adminId}
+	<delete id="delete" parameterType="com.cms.entity.User">
+		delete from cms_user where
+		userId=#{user.userId}
 	</delete>
 
 	<!-- ############################## -->
 	<!-- ###### 修改 ###### -->
 	<!-- ############################## -->
 
-	<update id="updateAdminByadminId">
-		update admin set password=#{password}
-		where adminId=#{adminId}
+	<update id="update" parameterType="com.cms.entity.User">
+		update cms_user set openId=#{openId},token=#{token}, refreshToken=#{refreshToken}, sourceType=#{sourceType},
+		name=#{name}, createTime=#{createTime}, refreshExpiredTime=#{refreshExpiredTime}, reExpiresIn=#{reExpiresIn}
+		where userId=#{userId}
 	</update>
 	<!-- ############################## -->
 	<!-- ###### 查询 ###### -->
 	<!-- ############################## -->
 
-	<select id="getAllList" resultType="com.cms.entity.Admin">
-		select * from admin limit
-		#{offset},#{rows}
+	<select id="getUserById" parameterType="long"
+		resultType="com.cms.entity.User">
+		select * from cms_user where userId=#{userId}
 	</select>
 
-	<select id="getAllListCount" resultType="int">
-		select count(*) from
-		admin
-	</select>
-
-	<select id="getAdminById" parameterType="long"
-		resultType="com.cms.entity.Admin">
-		select * from admin where adminId=#{adminId}
-	</select>
-
-	<select id="getAdminByName" resultType="com.cms.entity.vo.AdminVo">
-		select * from admin
-		where name=#{name}
+	<select id="getUserBySourceSys" resultType="com.cms.entity.User">
+		select * from cms_user
+		where openId=#{openId} and sourceType=#{sourceType}
 	</select>
 
 </mapper>  
