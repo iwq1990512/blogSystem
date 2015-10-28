@@ -35,7 +35,7 @@ import java.util.List;
  * @author Zhangjiale
  * 
  */
-@Service
+@Service("articleService")
 public class ArticleServiceImpl implements ArticleService{
 
 	@Autowired

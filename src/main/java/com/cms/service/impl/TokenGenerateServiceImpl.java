@@ -1,6 +1,7 @@
 package com.cms.service.impl;
 
 import com.cms.entity.UserAuthToken;
+import com.cms.service.TokenGenerateService;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
 import org.apache.log4j.Logger;
@@ -18,8 +19,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * token生成服务
  * @author yuheng
  */
-@Service
-public class TokenGenerateService {
+@Service("tokenGenerateService")
+public class TokenGenerateServiceImpl implements TokenGenerateService{
 
     private ReentrantLock lock = new ReentrantLock();
     private AtomicLong resetCounter = new AtomicLong(0);
@@ -30,11 +31,11 @@ public class TokenGenerateService {
     private int resetThreshold = 10000;
     private Charset encoding = Charset.forName("UTF-8");
 
-    private final Logger logger = Logger.getLogger(TokenGenerateService.class);
+    private final Logger logger = Logger.getLogger(TokenGenerateServiceImpl.class);
 
     private SecureRandom random;
 
-    public TokenGenerateService() {
+    public TokenGenerateServiceImpl() {
         this.resetSecureRandom();
     }
     /**

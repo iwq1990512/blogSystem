@@ -26,7 +26,7 @@ import java.util.List;
  * @author Zhangjiale
  * 
  */
-@Service
+@Service("folderService")
 public class FolderServiceImpl implements FolderService{
 
 	protected final Logger logger = Logger.getLogger(this.getClass());

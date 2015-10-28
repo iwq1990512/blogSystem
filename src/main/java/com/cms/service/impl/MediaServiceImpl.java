@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Service("mediaService")
 public class MediaServiceImpl implements MediaService{
 
 	@Autowired

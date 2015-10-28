@@ -1,4 +1,4 @@
-package com.cms.service.impl;
+package com.cms.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.Method;
 
 @Service
-public class KeyGeneratorServiceImpl implements KeyGenerator {
+public class KeyGeneratorService implements KeyGenerator {
 	
 	protected final Logger logger = Logger.getLogger(this.getClass());
 

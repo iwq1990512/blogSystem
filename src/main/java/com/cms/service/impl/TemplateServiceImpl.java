@@ -25,7 +25,7 @@ import java.util.List;
  * @author yuheng
  * 
  */
-@Service
+@Service("templateService")
 public class TemplateServiceImpl implements TemplateService {
 
 	private static String FOLDER_TEMPLATE_PREFIX = "folder";

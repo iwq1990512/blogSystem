@@ -17,7 +17,7 @@ import java.util.Date;
  * @author Zhangjiale
  * 
  */
-@Service
+@Service("configService")
 public class ConfigServiceImpl implements ConfigService {
 
 	@Autowired

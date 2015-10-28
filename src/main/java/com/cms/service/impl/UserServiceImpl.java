@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * Created by yuheng on 2015/10/18.
  */
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;

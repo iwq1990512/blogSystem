@@ -7,17 +7,19 @@ import com.cms.exception.AuthException;
 import com.cms.service.UserAuthService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 
 /**
  * Created by yuheng on 2015/10/19.
  */
+@Service("userAuthService")
 public class UserAuthServiceImpl implements UserAuthService{
     private final Logger logger = Logger.getLogger(UserAuthServiceImpl.class);
 
     @Autowired
-    private TokenGenerateService tokenGenerateService;
+    private TokenGenerateServiceImpl tokenGenerateService;
     @Autowired
     private UserAuthDao userAuthDao;
 
