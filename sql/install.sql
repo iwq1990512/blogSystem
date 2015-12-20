@@ -154,7 +154,7 @@ INSERT INTO `config` VALUES ('headline_image_height','420','首页头图的高�
 INSERT INTO `config` VALUES ('headline_image_width','858','首页头图的宽（px）','2012-08-08 00:00:00');
 INSERT INTO `config` VALUES ('seo_headline','CMS是用Java开发的内容管理系统','网站口号','2012-08-08 00:00:00');
 INSERT INTO `config` VALUES ('seo_title','CMS','网站名称','2012-08-08 00:00:00');
-INSERT INTO `config` VALUES ('static','false','是否启用全站静态化','2012-08-08 00:00:00');
+INSERT INTO `config` VALUES ('static','true','是否启用全站静态化','2012-08-08 00:00:00');
 INSERT INTO `config` VALUES ('template','blog','模板','2012-08-08 00:00:00');
 
 INSERT INTO `admin_folder` VALUES (1,1,'2014-10-29 20:48:42');
