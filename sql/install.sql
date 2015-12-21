@@ -135,13 +135,13 @@ CREATE TABLE `cms_user` (
 CREATE TABLE `user_auth` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `uid` bigint(20) NOT NULL COMMENT '用户id',
-  `token` varchar(40) NOT NULL COMMENT '令牌',
-  `token_expire` datetime NOT NULL COMMENT '令牌有效期(推荐7天)',
-  `refresh_token` varchar(40) NOT NULL COMMENT '刷新令牌',
-  `refresh_token_expire` datetime NOT NULL COMMENT '刷新令牌有效期(推荐30天)',
-  `is_delete` int(11) NOT NULL COMMENT '是否已经删除: 0未删除，1删除',
-  `createTime` datetime NOT NULL COMMENT '创建时间',
-  `modifiedTime` datetime NOT NULL COMMENT '修改时间',
+  `token` varchar(150) NOT NULL COMMENT '令牌',
+  `token_expire` TIMESTAMP COMMENT '令牌有效期(推荐7天)',
+  `refresh_token` varchar(150) NOT NULL COMMENT '刷新令牌',
+  `refresh_token_expire` TIMESTAMP  COMMENT '刷新令牌有效期(推荐30天)',
+  `is_delete` int(11) NOT NULL DEFAULT 0 COMMENT '是否已经删除: 0未删除，1删除',
+  `created_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `updated_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最近修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `token_UNIQUE` (`token`),
   UNIQUE KEY `refresh_token_UNIQUE` (`refresh_token`),
@@ -170,3 +170,4 @@ INSERT INTO `folder` VALUES (2,0,'about','关于博主','2','<p>朕就是这样�
 INSERT INTO `folder` VALUES (3,1,'life','生活','1#3','',2,1,0,0,0,'display','no','2014-10-29 20:16:53',NULL);
 INSERT INTO `folder` VALUES (4,1,'work','工作','1#4','',2,1,0,0,0,'display','no','2014-10-29 20:17:06',NULL);
 INSERT INTO `folder` VALUES (5,1,'travel','旅游','1#5','',2,1,0,0,0,'display','no','2014-10-29 20:17:39',NULL);
+ALTER TABLE `cms`.`cms_user` CHANGE `openId` `openId` VARCHAR(100) CHARSET utf8 COLLATE utf8_general_ci NULL COMMENT '公共用户ID，只有是QQ，微博等其它网站登录时才有sourceAccount', CHANGE `name` `name` VARCHAR(60) CHARSET utf8 COLLATE utf8_general_ci NULL COMMENT '用户名';

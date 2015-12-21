@@ -10,7 +10,7 @@
 	<insert id="add" parameterType="com.cms.entity.User">
 		insert into
 		cms_user(openId, token, refreshToken, sourceType, name, createTime, refreshExpiredTime, reExpiresIn)
-		value(#{name},#{password},#{createTime})
+		value(#{openId},#{token},#{refreshToken}, #{sourceType}, #{name},#{createTime},#{refreshExpiredTime},#{reExpiresIn})
 		<selectKey resultType="long" keyProperty="userId">
 			SELECT
 			LAST_INSERT_ID()

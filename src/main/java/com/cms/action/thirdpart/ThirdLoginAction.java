@@ -52,7 +52,7 @@ public class ThirdLoginAction extends BaseAction {
      * 第三方登录回调
      * @return
      */
-    @RequestMapping(value = "/thirdLoginCallback.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "/thdlogincallback.htm", method = RequestMethod.GET)
     public String thirdLoginCallback(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         creurl = (String)session.getAttribute("creurl");
         session.removeAttribute("creurl");

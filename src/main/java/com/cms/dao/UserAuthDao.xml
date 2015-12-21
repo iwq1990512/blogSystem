@@ -9,7 +9,7 @@
 
 	<insert id="insert" parameterType="com.cms.entity.UserAuthTokenRecord">
 		insert into
-		user_auth(uid,token,tokenExpire,refreshToken,refreshTokenExpire,isDelete,createTime,modifiedTime)
+		user_auth(uid,token,token_expire, refresh_token,refresh_token_expire ,is_delete,created_time, updated_time)
 		value(#{uid},#{token},#{tokenExpire},#{refreshToken},#{refreshTokenExpire},#{isDelete},#{createTime},#{modifiedTime})
 		<selectKey resultType="long" keyProperty="id">
 			SELECT

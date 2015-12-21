@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="${seo_description}">
-<link rel="icon" href="${TEMPLATE_BASE_PATH}/images/icon.bmp">
+<meta property="qc:admins" content="74047741376755506375" />
+    <link rel="icon" href="${TEMPLATE_BASE_PATH}/images/icon.bmp">
 <title>${seo_title}</title>
 
 <!-- Bootstrap core CSS -->

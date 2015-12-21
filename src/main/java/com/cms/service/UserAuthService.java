@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by yuheng on 2015/10/19.
@@ -23,14 +24,14 @@ public class UserAuthService {
     private UserAuthDao userAuthDao;
 
     public UserAuthToken loginThirdPart(long uid) throws AuthException {
-        UserAuthToken userAuthToken = new UserAuthToken();
-        userAuthToken = this.tokenGenerateService.generateToken();
+        UserAuthToken userAuthToken = this.tokenGenerateService.generateToken();
         this.insertToken(uid, userAuthToken);
         this.logger.info("login with third:{}, userAuthToken: {}" + uid + userAuthToken);
         return userAuthToken;
     }
 
     public Long checkAuth(String token) {
+        //todo 通过token查询user_auth表获取uid，能获取到uid就说明验证通过
         return null;
     }
 
