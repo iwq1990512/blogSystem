@@ -27,15 +27,26 @@
 </head>
 
 <body>
+	<div class="topbar">
+		<div class="container">
+			<ul class="list-inline pull-right">
+				<li>
+					<a id="logonModal" href="/thirdpart/login.htm?source=QQ">
+						<img alt="QQ登录" src="${TEMPLATE_BASE_PATH}/images/qq_bt_blue_76X24.png">
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<div class="blog-masthead">
 		<div class="container">
 			<nav class="blog-nav">
-			<@shishuo_folder_list_tag folderId= 0>
+			<@folder_list_tag folderId= 0>
 			<a class="blog-nav-item <#if 0==g_folderId>active</#if>" href="${BASE_PATH}/index.htm">首页</a>
 	                <#list tag_folder_list as tag_folder>
-	                	<a class="blog-nav-item <#if tag_folder.folderId==g_folderId>active</#if>" href="<@shishuo_folder_url_tag folderId=tag_folder.folderId/>">${tag_folder.name}</a>
+	                	<a class="blog-nav-item <#if tag_folder.folderId==g_folderId>active</#if>" href="<@folder_url_tag folderId=tag_folder.folderId/>">${tag_folder.name}</a>
 			</#list>
-           		</@shishuo_folder_list_tag>
+           		</@folder_list_tag>
 			</nav>
 		</div>
 	</div>

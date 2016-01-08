@@ -1,4 +1,4 @@
-<#assign config_v="20141009044">
+<#assign config_v="201601072310">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +10,22 @@
     <link rel="icon" href="${TEMPLATE_BASE_PATH}/images/icon.bmp">
 <title>${seo_title}</title>
 
-<!-- Bootstrap core CSS -->
 <link href="${TEMPLATE_BASE_PATH}/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
 <link href="${TEMPLATE_BASE_PATH}/css/blog.css" rel="stylesheet">
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<link rel="stylesheet" href="${TEMPLATE_BASE_PATH}/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="${TEMPLATE_BASE_PATH}/css/fontello.css"/>
+<link rel="stylesheet" href="${TEMPLATE_BASE_PATH}/css/ylb-public.css"/>
+<link rel="stylesheet" href="${TEMPLATE_BASE_PATH}/css/ylb-index.css"/>
+    <style type="text/css">
+        #scrollUp {
+            bottom: 120px;
+            right: 30px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: #fff;
+        }
+    </style>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="${TEMPLATE_BASE_PATH}/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script src="${TEMPLATE_BASE_PATH}/js/ie-emulation-modes-warning.js"></script>
 
@@ -27,28 +36,29 @@
     <![endif]-->
 </head>
 
-<body>
-	<div class="blog-masthead">
-        <ul class="list-inline pull-right">
-            <li>
-                <a id="logonModal" href="http://www.52menshao.com/third/login/3">
-                    <img alt="QQ登录" src="http://www.52menshao.com/assets/visitor/img/qq_bt_blue_76X24.png">
-                </a>
-            </li>
-        </ul>
-	</div>
+<body style="position: static;">
+    <div class="topbar">
+        <div class="container">
+            <ul class="list-inline pull-right">
+                <li>
+                    <a id="logonModal" href="/thirdpart/login.htm?source=QQ">
+                        <img alt="QQ登录" src="${TEMPLATE_BASE_PATH}/images/qq_bt_blue_76X24.png">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <div class="blog-masthead">
     <div class="container">
         <nav class="blog-nav">
-		<@shishuo_folder_list_tag folderId= 0>
+		<@folder_list_tag folderId= 0>
             <a class="blog-nav-item <#if 0==g_folderId>active</#if>" href="${BASE_PATH}/index.htm">首页</a>
 			<#list tag_folder_list as tag_folder>
-                <a class="blog-nav-item <#if tag_folder.folderId==g_folderId>active</#if>" href="<@shishuo_folder_url_tag folderId=tag_folder.folderId/>">${tag_folder.name}</a>
+                <a class="blog-nav-item <#if tag_folder.folderId==g_folderId>active</#if>" href="<@folder_url_tag folderId=tag_folder.folderId/>">${tag_folder.name}</a>
 			</#list>
-		</@shishuo_folder_list_tag>
             <a class="blog-nav-item" href="${BASE_PATH}/admin/login.htm">登录</a>
+		</@folder_list_tag>
         </nav>
-
     </div>
 		</div>
 </body>

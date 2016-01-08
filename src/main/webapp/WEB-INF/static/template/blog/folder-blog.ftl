@@ -1,7 +1,7 @@
 <#include "header.ftl">
 		<div class="row">
 			<div class="col-sm-8 blog-main">
-				<@shishuo_article_page_tag folderId=folder.folderId p=1 rows="8">
+				<@article_page_tag folderId=folder.folderId p=1 rows="8">
 					<div class="sidebar-box category-box white" style="margin-bottom: 20px;">
 						<ul style="padding-left:10px;">					
 						<#list tag_article_page.list as tag_article>
@@ -18,7 +18,7 @@
 						<div class="text-center">${tag_article_page.pageNumHtml}</div>
 						</ul>
 					</div>
-				</@shishuo_article_page_tag>
+				</@article_page_tag>
 			</div>
 			<!-- /.blog-sidebar -->
 			<#include "sidebar.ftl">

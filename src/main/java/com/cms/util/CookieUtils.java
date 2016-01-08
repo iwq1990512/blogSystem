@@ -55,7 +55,7 @@ public class CookieUtils {
         cookie.setMaxAge(age);
         cookie.setPath("/");
         String serverName = req.getServerName();
-        String domain = ".hyjx.com";
+        String domain = ".wmeup.com";
 
         try {
             if(StringUtils.isNotBlank(serverName) && !serverName.equalsIgnoreCase("localhost") && !serverName.equalsIgnoreCase("127.0.0.1") && !isIpAddress(serverName)) {

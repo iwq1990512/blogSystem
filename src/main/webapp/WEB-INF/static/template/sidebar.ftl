@@ -7,13 +7,13 @@
 					</p>
 				</div>
 				<div class="sidebar-module sidebar-module-inset">
-					<h4><a href="<@shishuo_folder_url_tag folderId=1/>">博客目录</a></h4>
+					<h4><a href="<@folder_url_tag folderId=1/>">博客目录</a></h4>
 					<ol class="list-unstyled">
-						<@shishuo_folder_list_tag folderId= 1>
+						<@folder_list_tag folderId= 1>
 		                		<#list tag_folder_list as tag_folder>
-						<li><a href="<@shishuo_folder_url_tag folderId=tag_folder.folderId/>">${tag_folder.name}</a><li>
+						<li><a href="<@folder_url_tag folderId=tag_folder.folderId/>">${tag_folder.name}</a><li>
 						</#list>
-	               				</@shishuo_folder_list_tag>
+	               				</@folder_list_tag>
 					</ol>
 				</div>
 				<div class="sidebar-module sidebar-module-inset">

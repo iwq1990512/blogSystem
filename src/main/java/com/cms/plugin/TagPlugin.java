@@ -31,7 +31,7 @@ public abstract class TagPlugin extends ApplicationObjectSupport implements
 		String className = this.getClass().getName()
 				.substring(this.getClass().getName().lastIndexOf(".") + 1);
 		String beanName = StringUtils.uncapitalize(className);
-		String tagName = "shishuo_" + SSUtils.toUnderline(beanName);
+		String tagName = SSUtils.toUnderline(beanName);
 		logger.info(tagName);
 		freeMarkerConfigurer.getConfiguration().setSharedVariable(tagName,
 				this.getApplicationContext().getBean(beanName));
