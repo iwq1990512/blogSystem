@@ -36,18 +36,7 @@
     <![endif]-->
 </head>
 
-<body style="position: static;">
-    <div class="topbar">
-        <div class="container">
-            <ul class="list-inline pull-right">
-                <li>
-                    <a id="logonModal" href="/thirdpart/login.htm?source=QQ">
-                        <img alt="QQ登录" src="${TEMPLATE_BASE_PATH}/images/qq_bt_blue_76X24.png">
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+<body>
     <div class="blog-masthead">
     <div class="container">
         <nav class="blog-nav">
@@ -56,8 +45,11 @@
 			<#list tag_folder_list as tag_folder>
                 <a class="blog-nav-item <#if tag_folder.folderId==g_folderId>active</#if>" href="<@folder_url_tag folderId=tag_folder.folderId/>">${tag_folder.name}</a>
 			</#list>
-            <a class="blog-nav-item" href="${BASE_PATH}/admin/login.htm">登录</a>
+            <#--<a class="blog-nav-item" href="${BASE_PATH}/admin/login.htm">登录</a>-->
 		</@folder_list_tag>
+            <a class="logoModal" href="/thirdpart/login.htm?source=QQ">
+                <img alt="QQ登录" src="${TEMPLATE_BASE_PATH}/images/qq_bt_blue_76X24.png">
+            </a>
         </nav>
     </div>
 		</div>
